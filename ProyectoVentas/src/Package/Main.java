@@ -15,6 +15,7 @@ public class Main {
 		System.out.println("");
 		System.out.println("Contenido archivo Productos separado por tabulaciones");
 		productsMethod.verProductos();
+		System.out.println("Fin");
 		
 
 	}
