@@ -1,49 +1,67 @@
 package Package;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Productos {
-	public static void verProductos() {
-		File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
- 
-        String linea = null;
- 
-        try {
-            //Cargamos el archivo de la ruta relativa
-            archivo = new File("src/Archivos/Productos.csv");
-            //Cargamos el objeto FileReader
-            fr = new FileReader(archivo);
-            //Creamos un buffer de lectura
-            br = new BufferedReader(fr);
- 
-            String[] datos = null;
- 
-            //Leemos hasta que se termine el archivo
-            while ((linea = br.readLine()) != null) {
- 
-                //Utilizamos el separador para los datos
-                datos = linea.split(";");               
-                
-                //Presentamos los datos
-                System.out.println(datos[0] + "\t" + datos[1] + "\t" + datos[2]);
- 
-            }
- 
-            //Capturamos las posibles excepciones
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fr != null) {
-                    fr.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
+	private static int idProducto;
+	private static String nomProducto;
+	private static Double vrProducto;
+
+	public static void IngresoProd() {
+		try(Scanner kb0 = new Scanner(System.in);
+				Scanner kb1 = new Scanner(System.in);
+				Scanner kb2 = new Scanner(System.in);
+				Scanner kb3 = new Scanner(System.in)){
+			String Continuar="si";
+			vrProducto = 0.0;
+			
+			ArrayList<String> ListaProductos = new ArrayList<String>();
+			
+			do {
+				System.out.println("Ingrese los datos del Producto");
+				System.out.println("Id del Producto:");
+				idProducto=kb0.nextInt();
+				System.out.println("Nombre del Producto:");
+				nomProducto=kb1.nextLine();
+				System.out.println("Valor Unitario del Producto:");
+				vrProducto=kb2.nextDouble();
+				
+				ListaProductos.add(idProducto + ";" + nomProducto + ";" + vrProducto);
+				
+				System.out.println("Datos Ingresados:");
+				for (int i = 0; i < ListaProductos.size(); i++) {
+					System.out.println(ListaProductos.get(i));
+				}
+				
+				System.out.println("Desea ingresar otro Vendedor Si/No");
+				Continuar=kb3.nextLine();
+			} while (Continuar.equals("Si") || Continuar.equals("SI") 
+					|| Continuar.equals("si") );
+			
+			kb0.close();
+			kb1.close();
+			kb2.close();
+			kb3.close();
+			
+			try {
+				FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/src/Archivos/Productos.csv", true);
+				BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+				
+				for (String elemento : ListaProductos) {
+					bufferWriter.write(elemento);
+					bufferWriter.newLine();
+				}
+				
+				bufferWriter.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 }
