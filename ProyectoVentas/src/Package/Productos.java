@@ -22,7 +22,6 @@ public class Productos {
 			ArrayList<String> ListaProductos = new ArrayList<String>();
 			
 			do {
-				System.out.println("Ingrese los datos del Producto");
 				System.out.println("Id del Producto:");
 				idProducto=kb0.nextInt();
 				System.out.println("Nombre del Producto:");

@@ -16,7 +16,6 @@ public class Vendedores {
 			ArrayList<String> ListaVendedores = new ArrayList<String>();
 			
 			do{
-				System.out.println("Ingrese los datos del vendedor");
 				System.out.println("Digite el tipo de documento (CC, RC, TI, PE, PS): ");
 				TipoDoc=teclado.nextLine();
 				System.out.println("Número de documento: ");
