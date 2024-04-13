@@ -48,7 +48,7 @@ public class Vendedores {
 			teclado4.close();
 			
 			try {
-				FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/src/Archivos/Vendedores.csv", true);
+				FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Vendedores.csv", true);
 				BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
 						
 				for (String elemento : ListaVendedores) {

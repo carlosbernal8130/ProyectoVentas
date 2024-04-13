@@ -47,7 +47,7 @@ public class Productos {
 			kb3.close();
 			
 			try {
-				FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/src/Archivos/Productos.csv", true);
+				FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Productos.csv", true);
 				BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
 				
 				for (String elemento : ListaProductos) {
