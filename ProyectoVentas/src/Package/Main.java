@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+	//Se declaran los escaneres y arraylist por fuera de los métodos para su ejecución y trabajo en todos los metodos
 	public static Scanner teclado = new Scanner(System.in);
 		
 	public static Scanner kb = new Scanner(System.in);
@@ -28,6 +29,7 @@ public class Main {
 
 
 	public static void main(String[] args) {
+		//Ejecución principal del programa se dejan comentados los métodos para pruebas de InsertarVenta()
 		System.out.println("Ingrese los datos del vendedor");
 		//IngresoVend();
 		System.out.println("Ingrese los datos del Producto");
@@ -36,12 +38,13 @@ public class Main {
 		InsertarVenta();
 	}
 	
+	//Este metodo se usa para insertar nuevos vendedores y los guarda en el documento Vendedores.csv
 	public static void IngresoVend() {
 		String TipoDoc, NombreVendor, ApellidoVendor, Continuar="si", NumDoc;
 			
 			
 		while (Continuar.equals("Si") || Continuar.equals("SI") 
-				|| Continuar.equals("si") ){
+				|| Continuar.equals("si") ){ //la condicional entra al ciclo en alguna de estas opciones
 			
 			
 			System.out.println("Digite el tipo de documento (CC, RC, TI, PE, PS): ");
@@ -55,18 +58,18 @@ public class Main {
 			System.out.println("");
 				
 			ListaVendedores.add(TipoDoc + ";" + NumDoc + ";" + NombreVendor + ";" 
-			+ ApellidoVendor);
+			+ ApellidoVendor); //adiciona lo digitado en el arraylist de vendedores
 				
-				
+			//recorre el arraylist de vendedores e imprime su contenido en pantalla recorriendo el arraylist	
 			System.out.println("Datos Ingresados:");
 			for (int i = 0; i < ListaVendedores.size(); i++) {
 				System.out.println(ListaVendedores.get(i));
 			}
-				
+			//pregunta para mantener el ciclo	
 			System.out.println("Desea ingresar otro Vendedor Si/No");
 			Continuar=teclado.nextLine();				
 		} 
-			
+		//este bloque de código guarda el contenido del arraylist en el archivo Vendedores.csv	
 		try {
 			FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Vendedores.csv", true);
 			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
@@ -82,42 +85,44 @@ public class Main {
 		}
 			
 	}
-	
+	//Método para ingresar productos y guardarlos en el Productos.csv
 	public static void IngresoProd() {
 		String idProd;
 		String nomProd;
 		String Continuar;
 		Double vrProd;
-								
+		
+		//ejecuta el ciclo aunque sea una vez para garantizar el ingreso por esto se usa do
 		do{
-			
-			
 			System.out.println("Identificador del Producto:");			
-			idProd=kb.nextLine();
+			idProd=kb.nextLine(); //ingreso en consola de id del producto
 				
 			System.out.println("Nombre del Producto:");
-			nomProd=kb1.nextLine();
+			nomProd=kb1.nextLine(); //ingreso en consola el nombre del producto
 				
 			System.out.println("Valor Unitario del Producto:");
-			vrProd=kb2.nextDouble();
+			vrProd=kb2.nextDouble(); //ingreso en consola del valor unitario del producto
 				
-			ListaProductos.add(idProd + ";" + nomProd + ";" + vrProd);
-				
+			ListaProductos.add(idProd + ";" + nomProd + ";" + vrProd); //guarda en arraylist lo digitado en pantalla
+			
+			//recorre con un ciclo for el arraylist de productos e imprime en pantalla cada elemento
 			System.out.println("Datos Ingresados:");
 			for (int i = 0; i < ListaProductos.size(); i++) {
 				System.out.println(ListaProductos.get(i));
 			}
-				
+			//pregunta para mantener el ciclo	
 			System.out.println("Desea ingresar otro Producto Si/No");
 			Continuar=kb3.nextLine();
 			
 		}while (Continuar.equals("Si") || Continuar.equals("SI") || Continuar.equals("si"));
 			
-					
+		//este bloque de código guarda el contenido del arraylist en el archivo Productos.csv			
 		try {
 			FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Productos.csv", true);
 			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
-				
+			
+			/*ciclo for each o 'para cada' que permite el recorrido en el arraylist linea a linea y 
+			  escribe en el documento csv la linea recorrida*/
 			for (String elemento : ListaProductos) {
 				bufferWriter.write(elemento);
 				bufferWriter.newLine();
@@ -131,16 +136,21 @@ public class Main {
 		
 	} 
 	
+	
 	public static void InsertarVenta() {
 		
-		//Parte que selecciona el vendedor
+		//declaracion de variables
 		File file = null;
         FileReader fileReader = null;
         BufferedReader bufferReader = null;
  
         String linea1 = null;
 		
-		try {
+        /*el método inicia recorriendo el documento csv de vendedores para cargar en el 
+        arraylist de vendedores la información de los vendedores y listarla en pantalla esto con el objetivo 
+        de que el usuario pueda digitar la cedula y seleccionar para empezar a guardar en el arraylist de ventas*/ 
+		
+        try {
             //Cargamos el archivo de la ruta relativa
             file = new File(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Vendedores.csv");
             //Cargamos el objeto FileReader
@@ -164,7 +174,7 @@ public class Main {
                 String list=datos1[0] + "\t" + datos1[1] + "\t" + datos1[2] + " " + datos1[3];
                 String listfil=datos1[0] + ";" + datos1[1] + ";" + datos1[2] + " " + datos1[3];
                 System.out.println(list);
-                ListaVendedores.add(listfil);
+                ListaVendedores.add(listfil); //guarda la linea recorrida en el arraylist de vendedores
             }
  
             //Capturamos las posibles excepciones
@@ -180,22 +190,27 @@ public class Main {
             }
         }
 	
-		
+		/*este bloque permite hacer una busqueda del documento digitado en consola y 
+		 * lo guarda en array list de ventas
+		 */
 		System.out.println("Digite el documento del vendedor seleccionado:");
 		String documentoV;
 		documentoV = keyboard.nextLine();
 		String resultado=null;
 		
+		//recorre el array de vendedores y toma lo con el contains la busqueda de vendedor digitada
 		for (String cadena : ListaVendedores) {
 			if (cadena.contains(documentoV)) {
 				resultado=cadena;
 				break;
 			}
 		}
+		//Impresión de la busqueda realizada.
 		String[] resultado_array = resultado.split(";");
 		String result_final = resultado_array[0] + " " + resultado_array[1] + " " + resultado_array[2];
 		System.out.println("Vendedor seleccionado: " + result_final);
 		
+		//Inserción en arraylist de ventas
 		ListaVentas.add(result_final);
 		
 		//tiempo de 5segs para que muestre listado de productos
@@ -230,7 +245,8 @@ public class Main {
             
            ListaProductos.clear(); 
             
-            //Leemos hasta que se termine el archivo
+            /*lectura del archivo Productos.csv y llenado linea a linea del arraylist de productos. 
+             * Leemos hasta que se termine el archivo. */
             while ((linea = br.readLine()) != null) {
  
                 //Utilizamos el separador para los datos
