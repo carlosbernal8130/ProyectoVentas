@@ -31,7 +31,7 @@ public class Main {
 	public static void main(String[] args) {
 		//Ejecución principal del programa se dejan comentados los métodos para pruebas de InsertarVenta()
 		System.out.println("Ingrese los datos del vendedor");
-		IngresoVend();
+		//IngresoVend();
 		System.out.println("Ingrese los datos del Producto");
 		//IngresoProd();
 		System.out.println("venta");
@@ -71,7 +71,7 @@ public class Main {
 		} 
 		//este bloque de código guarda el contenido del arraylist en el archivo Vendedores.csv	
 		try {
-			FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Vendedores.csv", true);
+			FileWriter fileWriter = new FileWriter("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Vendedores.csv", true);
 			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
 						
 			for (String elemento : ListaVendedores) {
@@ -118,7 +118,7 @@ public class Main {
 			
 		//este bloque de código guarda el contenido del arraylist en el archivo Productos.csv			
 		try {
-			FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Productos.csv", true);
+			FileWriter fileWriter = new FileWriter("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Productos.csv", true);
 			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
 			
 			/*ciclo for each o 'para cada' que permite el recorrido en el arraylist linea a linea y 
@@ -152,7 +152,7 @@ public class Main {
 		
         try {
             //Cargamos el archivo de la ruta relativa
-            file = new File(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Vendedores.csv");
+            file = new File("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Vendedores.csv");
             //Cargamos el objeto FileReader
             fileReader = new FileReader(file);
             //Creamos un buffer de lectura
@@ -232,7 +232,7 @@ public class Main {
  
         try {
             //Cargamos el archivo de la ruta relativa
-            archivo = new File(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Productos.csv");
+            archivo = new File("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Productos.csv");
             //Cargamos el objeto FileReader
             fr = new FileReader(archivo);
             //Creamos un buffer de lectura
