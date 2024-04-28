@@ -151,7 +151,7 @@ public class Main {
         de que el usuario pueda digitar la cedula y seleccionar para empezar a guardar en el arraylist de ventas*/ 
 		
         try {
-            //Cargamos el archivo de la ruta relativa
+            //Cargamos el archivo de la ruta absoluta
             file = new File("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Vendedores.csv");
             //Cargamos el objeto FileReader
             fileReader = new FileReader(file);
