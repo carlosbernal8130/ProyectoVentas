@@ -20,11 +20,11 @@ public class Main {
 
 	public static Scanner keyboard = new Scanner(System.in);
 	
-	public static ArrayList<String> ListaVendedores = new ArrayList<String>();
+	public static ArrayList<String> listaVendedores = new ArrayList<String>();
 	
-	public static ArrayList<String> ListaProductos = new ArrayList<String>();
+	public static ArrayList<String> listaProductos = new ArrayList<String>();
 	
-	public static ArrayList<String> ListaVentas = new ArrayList<String>();
+	public static ArrayList<String> listaVentas = new ArrayList<String>();
 
 
 
@@ -57,13 +57,13 @@ public class Main {
 			apellidoVendor= teclado.nextLine();
 			System.out.println("");
 				
-			ListaVendedores.add(tipoDoc + ";" + numDoc + ";" + nombreVendor + ";" 
+			listaVendedores.add(tipoDoc + ";" + numDoc + ";" + nombreVendor + ";" 
 			+ apellidoVendor); //adiciona lo digitado en el arraylist de vendedores
 				
 			//recorre el arraylist de vendedores e imprime su contenido en pantalla recorriendo el arraylist	
 			System.out.println("Datos Ingresados:");
-			for (int i = 0; i < ListaVendedores.size(); i++) {
-				System.out.println(ListaVendedores.get(i));
+			for (int i = 0; i < listaVendedores.size(); i++) {
+				System.out.println(listaVendedores.get(i));
 			}
 			//pregunta para mantener el ciclo	
 			System.out.println("Desea ingresar otro Vendedor Si/No");
@@ -71,10 +71,10 @@ public class Main {
 		} 
 		//este bloque de código guarda el contenido del arraylist en el archivo Vendedores.csv	
 		try {
-			FileWriter fileWriter = new FileWriter("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Vendedores.csv", true);
+			FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Vendedores.csv", true);
 			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
 						
-			for (String elemento : ListaVendedores) {
+			for (String elemento : listaVendedores) {
 				bufferWriter.write(elemento);
 				bufferWriter.newLine();
 			}
@@ -103,12 +103,12 @@ public class Main {
 			System.out.println("Valor Unitario del Producto:");
 			vrProd=kb2.nextDouble(); //ingreso en consola del valor unitario del producto
 				
-			ListaProductos.add(idProd + ";" + nomProd + ";" + vrProd); //guarda en arraylist lo digitado en pantalla
+			listaProductos.add(idProd + ";" + nomProd + ";" + vrProd); //guarda en arraylist lo digitado en pantalla
 			
 			//recorre con un ciclo for el arraylist de productos e imprime en pantalla cada elemento
 			System.out.println("Datos Ingresados:");
-			for (int i = 0; i < ListaProductos.size(); i++) {
-				System.out.println(ListaProductos.get(i));
+			for (int i = 0; i < listaProductos.size(); i++) {
+				System.out.println(listaProductos.get(i));
 			}
 			//pregunta para mantener el ciclo	
 			System.out.println("Desea ingresar otro Producto Si/No");
@@ -118,12 +118,12 @@ public class Main {
 			
 		//este bloque de código guarda el contenido del arraylist en el archivo Productos.csv			
 		try {
-			FileWriter fileWriter = new FileWriter("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Productos.csv", true);
+			FileWriter fileWriter = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Productos.csv", true);
 			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
 			
 			/*ciclo for each o 'para cada' que permite el recorrido en el arraylist linea a linea y 
 			  escribe en el documento csv la linea recorrida*/
-			for (String elemento : ListaProductos) {
+			for (String elemento : listaProductos) {
 				bufferWriter.write(elemento);
 				bufferWriter.newLine();
 			}
@@ -152,7 +152,7 @@ public class Main {
 		
         try {
             //Cargamos el archivo de la ruta absoluta
-            file = new File("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Vendedores.csv");
+            file = new File(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Vendedores.csv");
             //Cargamos el objeto FileReader
             fileReader = new FileReader(file);
             //Creamos un buffer de lectura
@@ -163,7 +163,7 @@ public class Main {
             System.out.println("Selecciones un vendedor");
             System.out.println("TIPO DOC" + "\t" + "NRO DOCUMENTO" + "\t" + "NOMBRE COMPLETO");
             
-            ListaVendedores.clear();
+            listaVendedores.clear();
             
             //Leemos hasta que se termine el archivo
             while ((linea1 = bufferReader.readLine()) != null) {
@@ -172,9 +172,9 @@ public class Main {
                 datos1 = linea1.split(";");
                 //Presentamos los datos
                 String list=datos1[0] + "\t" + datos1[1] + "\t" + datos1[2] + " " + datos1[3];
-                String listfil=datos1[0] + ";" + datos1[1] + ";" + datos1[2] + " " + datos1[3];
+                String listFil=datos1[0] + ";" + datos1[1] + ";" + datos1[2] + " " + datos1[3];
                 System.out.println(list);
-                ListaVendedores.add(listfil); //guarda la linea recorrida en el arraylist de vendedores
+                listaVendedores.add(listFil); //guarda la linea recorrida en el arraylist de vendedores
             }
  
             //Capturamos las posibles excepciones
@@ -199,25 +199,24 @@ public class Main {
 		String resultado=null;
 		
 		//recorre el array de vendedores y toma lo con el contains la busqueda de vendedor digitada
-		for (String cadena : ListaVendedores) {
+		for (String cadena : listaVendedores) {
 			if (cadena.contains(documentoV)) {
 				resultado=cadena;
 				break;
 			}
 		}
 		//Impresión de la busqueda realizada.
-		String[] resultado_array = resultado.split(";");
-		String result_final = resultado_array[0] + " " + resultado_array[1] + " " + resultado_array[2];
+		String[] resultado_Array = resultado.split(";");
+		String result_final = resultado_Array[0] + " " + resultado_Array[1] + " " + resultado_Array[2];
 		System.out.println("Vendedor seleccionado: " + result_final);
 		
 		//Inserción en arraylist de ventas
-		ListaVentas.add(result_final);
+		listaVentas.add(result_final);
 		
 		//tiempo de 5segs para que muestre listado de productos
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 				
@@ -232,7 +231,7 @@ public class Main {
  
         try {
             //Cargamos el archivo de la ruta relativa
-            archivo = new File("/home/carlos-bernal/git/ProyectoVentas/ProyectoVentas/src/Archivos/Productos.csv");
+            archivo = new File(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Productos.csv");
             //Cargamos el objeto FileReader
             fr = new FileReader(archivo);
             //Creamos un buffer de lectura
@@ -243,7 +242,7 @@ public class Main {
             System.out.println("LISTA DE PRODUCTOS");
             System.out.println("CODIGO" + "\t" + "DESCRIPCION" + "\t" + "VALOR UNITARIO");
             
-           ListaProductos.clear(); 
+           listaProductos.clear(); 
             
             /*lectura del archivo Productos.csv y llenado linea a linea del arraylist de productos. 
              * Leemos hasta que se termine el archivo. */
@@ -253,9 +252,46 @@ public class Main {
                 datos = linea.split(";");
                 //Presentamos los datos
                 System.out.println(datos[0] + "\t" + datos[1] + "\t" + datos[2]);
-                ListaProductos.add(datos[0] + ";" + datos[1] + ";" + datos[2]);
+                listaProductos.add(datos[0] + ";" + datos[1] + ";" + datos[2]);
             }
- 
+            
+            String idProdVenta, continuar;
+            int cantidadVendida;
+            
+            Scanner inputLetra = new Scanner(System.in);
+            Scanner inputInteger = new Scanner(System.in);
+            
+            do {
+            	System.out.println("Digite el Id del producto:");
+            	idProdVenta = inputLetra.nextLine();
+            	
+            	System.out.println("Digite el la cantidad vendida:");
+            	cantidadVendida = inputInteger.nextInt();
+            	
+            	for (String cadena : listaProductos) {
+        			if (cadena.contains(idProdVenta)) {
+        				resultado=cadena;
+        				break;
+        			}
+        		}
+        		
+            	
+        		String[] resulArrayVenta = resultado.split(";");
+        		Double resultFinalVenta = Double.parseDouble(resulArrayVenta[2]);
+        		
+        		Double totalVendido = cantidadVendida * resultFinalVenta;
+            	
+            	listaVentas.add(idProdVenta + ";" + cantidadVendida + ";" + totalVendido.toString());
+            	
+            	
+            	System.out.println("Desea ingresar otro Producto Si/No");
+    			continuar=inputLetra.nextLine();
+            	
+            }while (continuar.equals("Si") || continuar.equals("SI") 
+    				|| continuar.equals("si"));
+            
+            
+            
             //Capturamos las posibles excepciones
         } catch (Exception e) {
             e.printStackTrace();
