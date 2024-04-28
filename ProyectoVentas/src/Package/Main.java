@@ -40,25 +40,25 @@ public class Main {
 	
 	//Este metodo se usa para insertar nuevos vendedores y los guarda en el documento Vendedores.csv
 	public static void IngresoVend() {
-		String TipoDoc, NombreVendor, ApellidoVendor, Continuar="si", NumDoc;
+		String tipoDoc, nombreVendor, apellidoVendor, continuar="si", numDoc;
 			
 			
-		while (Continuar.equals("Si") || Continuar.equals("SI") 
-				|| Continuar.equals("si") ){ //la condicional entra al ciclo en alguna de estas opciones
+		while (continuar.equals("Si") || continuar.equals("SI") 
+				|| continuar.equals("si") ){ //la condicional entra al ciclo en alguna de estas opciones
 			
 			
 			System.out.println("Digite el tipo de documento (CC, RC, TI, PE, PS): ");
-			TipoDoc=teclado.nextLine();
+			tipoDoc=teclado.nextLine();
 			System.out.println("Número de documento: ");
-			NumDoc= teclado.nextLine();
+			numDoc= teclado.nextLine();
 			System.out.println("Nombres del Vendedor: ");
-			NombreVendor= teclado.nextLine();
+			nombreVendor= teclado.nextLine();
 			System.out.println("Apellidos del Vendedor: ");
-			ApellidoVendor= teclado.nextLine();
+			apellidoVendor= teclado.nextLine();
 			System.out.println("");
 				
-			ListaVendedores.add(TipoDoc + ";" + NumDoc + ";" + NombreVendor + ";" 
-			+ ApellidoVendor); //adiciona lo digitado en el arraylist de vendedores
+			ListaVendedores.add(tipoDoc + ";" + numDoc + ";" + nombreVendor + ";" 
+			+ apellidoVendor); //adiciona lo digitado en el arraylist de vendedores
 				
 			//recorre el arraylist de vendedores e imprime su contenido en pantalla recorriendo el arraylist	
 			System.out.println("Datos Ingresados:");
@@ -67,7 +67,7 @@ public class Main {
 			}
 			//pregunta para mantener el ciclo	
 			System.out.println("Desea ingresar otro Vendedor Si/No");
-			Continuar=teclado.nextLine();				
+			continuar=teclado.nextLine();				
 		} 
 		//este bloque de código guarda el contenido del arraylist en el archivo Vendedores.csv	
 		try {
@@ -89,7 +89,7 @@ public class Main {
 	public static void IngresoProd() {
 		String idProd;
 		String nomProd;
-		String Continuar;
+		String continuar;
 		Double vrProd;
 		
 		//ejecuta el ciclo aunque sea una vez para garantizar el ingreso por esto se usa do
@@ -112,9 +112,9 @@ public class Main {
 			}
 			//pregunta para mantener el ciclo	
 			System.out.println("Desea ingresar otro Producto Si/No");
-			Continuar=kb3.nextLine();
+			continuar=kb3.nextLine();
 			
-		}while (Continuar.equals("Si") || Continuar.equals("SI") || Continuar.equals("si"));
+		}while (continuar.equals("Si") || continuar.equals("SI") || continuar.equals("si"));
 			
 		//este bloque de código guarda el contenido del arraylist en el archivo Productos.csv			
 		try {
