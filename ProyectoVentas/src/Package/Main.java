@@ -31,7 +31,7 @@ public class Main {
 	public static void main(String[] args) {
 		//Ejecución principal del programa se dejan comentados los métodos para pruebas de InsertarVenta()
 		System.out.println("Ingrese los datos del vendedor");
-		//IngresoVend();
+		IngresoVend();
 		System.out.println("Ingrese los datos del Producto");
 		//IngresoProd();
 		System.out.println("venta");
