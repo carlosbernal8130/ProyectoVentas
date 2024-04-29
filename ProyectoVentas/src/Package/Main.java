@@ -20,22 +20,50 @@ public class Main {
 
 	public static Scanner keyboard = new Scanner(System.in);
 	
+	public static Scanner inputLetra = new Scanner(System.in);
+	public static Scanner inputInteger = new Scanner(System.in);
+	
 	public static ArrayList<String> listaVendedores = new ArrayList<String>();
 	
 	public static ArrayList<String> listaProductos = new ArrayList<String>();
 	
 	public static ArrayList<String> listaVentas = new ArrayList<String>();
 
+	private static Scanner opcion;
+
 
 
 	public static void main(String[] args) {
+		opcion = new Scanner(System.in);
+		String option;
+		
 		//Ejecución principal del programa se dejan comentados los métodos para pruebas de InsertarVenta()
-		System.out.println("Ingrese los datos del vendedor");
-		//IngresoVend();
-		System.out.println("Ingrese los datos del Producto");
-		//IngresoProd();
-		System.out.println("venta");
-		InsertarVenta();
+		
+		System.out.println("Desea ingresar un Nuevo Vendedor? Si/No");
+		option=opcion.nextLine();
+		
+		if (option.equalsIgnoreCase("si")){
+			limpiarPantalla();
+			System.out.println("Ingrese los datos del vendedor");
+			IngresoVend();
+		}
+		
+		System.out.println("Desea ingresar un Nuevo Producto? Si/No");
+		option=opcion.nextLine();
+		
+		if (option.equalsIgnoreCase("si")){
+			limpiarPantalla();
+			System.out.println("Ingrese los datos del Producto");
+			IngresoProd();
+		}
+		
+		System.out.println("Desea ingresar una Nueva Venta? Si/No");
+		option=opcion.nextLine();
+		
+		if (option.equalsIgnoreCase("si")){
+			limpiarPantalla();
+			InsertarVenta();
+		}
 	}
 	
 	//Este metodo se usa para insertar nuevos vendedores y los guarda en el documento Vendedores.csv
@@ -90,7 +118,7 @@ public class Main {
 		String idProd;
 		String nomProd;
 		String continuar;
-		Double vrProd;
+		int vrProd;
 		
 		//ejecuta el ciclo aunque sea una vez para garantizar el ingreso por esto se usa do
 		do{
@@ -101,7 +129,7 @@ public class Main {
 			nomProd=kb1.nextLine(); //ingreso en consola el nombre del producto
 				
 			System.out.println("Valor Unitario del Producto:");
-			vrProd=kb2.nextDouble(); //ingreso en consola del valor unitario del producto
+			vrProd=kb2.nextInt(); //ingreso en consola del valor unitario del producto
 				
 			listaProductos.add(idProd + ";" + nomProd + ";" + vrProd); //guarda en arraylist lo digitado en pantalla
 			
@@ -208,10 +236,11 @@ public class Main {
 		//Impresión de la busqueda realizada.
 		String[] resultado_Array = resultado.split(";");
 		String result_final = resultado_Array[0] + " " + resultado_Array[1] + " " + resultado_Array[2];
+		String result_final1 = resultado_Array[0] + ";" + resultado_Array[1] + ";" + resultado_Array[2];
 		System.out.println("Vendedor seleccionado: " + result_final);
 		
 		//Inserción en arraylist de ventas
-		listaVentas.add(result_final);
+		listaVentas.add(result_final1);
 		
 		//tiempo de 5segs para que muestre listado de productos
 		try {
@@ -255,42 +284,52 @@ public class Main {
                 listaProductos.add(datos[0] + ";" + datos[1] + ";" + datos[2]);
             }
             
-            String idProdVenta, continuar;
+            String idProdVenta=null, continuar="si";
             int cantidadVendida;
             
-            Scanner inputLetra = new Scanner(System.in);
-            Scanner inputInteger = new Scanner(System.in);
+            while (continuar.equals("Si") || continuar.equals("SI") || continuar.equals("si")) {
             
-            do {
             	System.out.println("Digite el Id del producto:");
             	idProdVenta = inputLetra.nextLine();
-            	
+        
             	System.out.println("Digite el la cantidad vendida:");
-            	cantidadVendida = inputInteger.nextInt();
-            	
-            	for (String cadena : listaProductos) {
-        			if (cadena.contains(idProdVenta)) {
-        				resultado=cadena;
-        				break;
+            	cantidadVendida = inputInteger.nextInt();   
+
+            	for (String cadena1 : listaProductos) {
+        			if (cadena1.contains(idProdVenta)) {
+        					resultado=cadena1;
+        					break;
         			}
-        		}
+            	}
+            	
+            	String[] resulArrayVenta = resultado.split(";");
         		
-            	
-        		String[] resulArrayVenta = resultado.split(";");
-        		Double resultFinalVenta = Double.parseDouble(resulArrayVenta[2]);
+        		int resultFinalVenta = Integer.parseInt(resulArrayVenta[2]);
         		
-        		Double totalVendido = cantidadVendida * resultFinalVenta;
+        		int totalVendido = cantidadVendida * resultFinalVenta;
             	
-            	listaVentas.add(idProdVenta + ";" + cantidadVendida + ";" + totalVendido.toString());
-            	
-            	
+            	listaVentas.add(idProdVenta + ";"+ resulArrayVenta[1] + ";" + cantidadVendida + ";" + 
+            	String.valueOf(totalVendido));        		            
+
             	System.out.println("Desea ingresar otro Producto Si/No");
     			continuar=inputLetra.nextLine();
-            	
-            }while (continuar.equals("Si") || continuar.equals("SI") 
-    				|| continuar.equals("si"));
-            
-            
+            	}
+
+            	try {
+    				FileWriter fileWrt = new FileWriter(System.getProperty("user.dir") + "/ProyectoVentas/src/Archivos/Ventas/Ventas.csv", true);
+    				BufferedWriter bufferWrt = new BufferedWriter(fileWrt);
+    							
+    				for (String element : listaVentas) {
+    					bufferWrt.write(element);
+    					bufferWrt.newLine();
+    				}
+    				
+    				bufferWrt.close();
+    			} 
+    			
+    			catch (Exception e) {
+					e.printStackTrace();
+				}
             
             //Capturamos las posibles excepciones
         } catch (Exception e) {
@@ -305,5 +344,14 @@ public class Main {
             }
         }
 	
+	}
+	public static void limpiarPantalla() {
+        try {
+            ProcessBuilder pb = new ProcessBuilder("clear");
+            Process iniciarProceso = pb.inheritIO().start();
+            iniciarProceso.waitFor();
+        } catch (Exception e) {
+            /*No hacer nada*/
+        }
 	}
 }
