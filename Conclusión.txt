@@ -1,0 +1,21 @@
+1. Lo aprendido durante el desarrollo del proyecto.
+
+Aprendimos sobre como funcionan las Estructuras de control de flujo de programa sus diversos usos e implementaciones para la optimización y correcta reutilización de código mediante iteraciones y como estas se pueden controlar mediante longitudes fijas y condicionales. Para optimizar y organizar de una forma correcta se aprende el uso de métodos creados por el usuario para un alcance optimo a la hora de ejecutar tareas invocadas ya sea desde una clase o varias dependiendo del alcance que se tenga.
+
+Dimos alcance al conocimiento recibido sobre Arreglos de tamaño fijo, en donde se aplicaron para obtener valores y guardar valores para la inserción en Contenedores.
+
+Uno de los aspectos más importantes de lo aprendido han sido los Contenedores ya que mediante estos pudimos realizar asignaciones y asignaciones en memoria de información para generar los archivos resultantes.
+
+Otro aspecto aprendido e importante, aunque no fue tema de la clase, fueron los usos de los métodos FileReader y FileWriter para la lectura y escritura de archivos "csv" (archivo delimitado por comas o en este caso punto y coma) y el método split para dividir el contenido del archivo csv con el objetivo de guardar estos valores en arreglos.
+
+2. Posibles aplicaciones en su vida profesional de las destrezas y conocimientos adquiridos y
+practicados durante el desarrollo del proyecto.
+
+La aplicación es bastante amplia teniendo en cuenta que existe en el proyecto un componente de normalización de datos para generar información. Además, para la generación de informes basados en otros documentos y cálculos mediante la codificación aplicada.
+
+3. Las dificultades presentadas durante el desarrollo del proyecto.
+
+Una de las dificultades presentadas fue el manejo de Scanner para la captura de datos ya que al existir varios tipos de variables para guardar información se identifica un Scanner puede recibir por ejemplo un dato de tipo Integer pero después no un String.
+
+Otra dificultad presentada fue el uso correcto de estructuras de control sobre todo con los ciclos for y while, porque para recorres un Contenedor debe estar correctamente dispuesto para que no existan repeticiones o duplicidad de información.
+
